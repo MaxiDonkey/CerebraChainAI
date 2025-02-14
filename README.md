@@ -206,6 +206,11 @@ Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner
        Memo1.Lines.Add('Erreur : ' + E.Message);
      end); 
 ```
+>[!WARNING]
+> Execution is asynchronous. It is crucial to ensure that the chained instruction is constructed as a single, continuous statement to avoid introducing intermediate processing steps, which would inherently be synchronous.
+
+**What fascinates me about this mechanism is that it all comes down to a single instruction.**
+
 
 <br/>
 
