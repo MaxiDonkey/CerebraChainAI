@@ -200,7 +200,7 @@ Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner
         Memo1.Lines.Add('Step 3: ' + Value);
         Memo1.Lines.Add(sLineBreak);
       end)
-   .&Catch(                                                                         //Catch error
+   .&Catch(                                                        //Catch error
      procedure(E: Exception)
      begin
        Memo1.Lines.Add('Erreur : ' + E.Message);
