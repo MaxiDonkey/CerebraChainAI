@@ -111,7 +111,7 @@ begin
 end; 
 ```
 
-We can observe that this method is asynchronous; it calls the Client.Chat.AsyncCreate method.
+We can observe that this method is asynchronous; it calls the `Client.Chat.AsyncCreate` method.
 
 >[!NOTE]
 > We use the ***GenAI*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
