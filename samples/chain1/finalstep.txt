@@ -1,4 +1,0 @@
-%s
-Write an article with a philosophical approach to answer the question from the previous JSON, using the information contained in that same JSON.
-- Use an unconventional yet accurate tone to captivate the reader.
-- Pay close attention to clarity, relevance, and originality in the writing.
