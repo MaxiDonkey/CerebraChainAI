@@ -11,6 +11,7 @@ ___
 - [Introduction](#Introduction)
 - [Managing Promises and Thought Chains with Generative AI Models](#Managing-Promises-and-Thought-Chains-with-Generative-AI-Models)
 - [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
+    - [Getting started](#Getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -47,6 +48,24 @@ We will emphasize:
 <br/>
 
 # Managing Promises and Thought Chains with Generative AI Models
+
+<br/>
+
+## Getting started
+
+To understand how to effectively manage promises and structure thought chains with generative AI models, we will start with a simple yet concrete example. This exercise will help us grasp the underlying mechanisms and see how promises facilitate clear and structured asynchronous execution.
+
+For this demonstration, we will use the GenAI wrapper for OpenAI (DelphiGenAI). This choice allows us to illustrate how promises streamline interactions with large language models, making multi-step reasoning more intuitive and manageable.
+
+The goal of this section is to progressively explore how promises work in the context of generative AI by building a structured thought chain. This will allow us to:
+
+- Efficiently organize sequential AI requests.
+- Avoid excessive callback nesting and improve code readability.
+- Ensure smooth asynchronous execution without blocking the main thread.
+
+We will implement an example where the AI model selects a random fruit, describes its characteristics, and then suggests a similar fruit. This exercise will demonstrate how promises enable AI-driven reasoning to be chained in an elegant and scalable way.
+
+By the end of this section, you will have a solid understanding of how to use `ASync.Promise` to manage complex AI interactions in a structured and efficient manner.
 
 <br/>
 
