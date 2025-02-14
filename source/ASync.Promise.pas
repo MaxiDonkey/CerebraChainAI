@@ -183,6 +183,9 @@ type
     function &Catch(AOnReject: TProc<Exception>): TPromise<T>;
   end;
 
+var
+  PromizeList: TObjectList<TObject>;
+
 implementation
 
 { TPromise<T> }
@@ -191,6 +194,7 @@ constructor TPromise<T>.Create(AExecutor: TExecutor);
 begin
   inherited Create;
   FState := psPending;
+  PromizeList.Add(Self);
   FThenHandlers := TList<TProc<T>>.Create;
   FCatchHandlers := TList<TProc<Exception>>.Create;
   try
@@ -588,4 +592,8 @@ begin
       end);
 end;
 
+initialization
+  PromizeList := TObjectList<TObject>.Create(True);
+finalization
+  PromizeList.Free;
 end.
