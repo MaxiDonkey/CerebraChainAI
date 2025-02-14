@@ -12,6 +12,7 @@ ___
 - [Managing Promises and Thought Chains with Generative AI Models](#Managing-Promises-and-Thought-Chains-with-Generative-AI-Models)
 - [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
     - [Getting started](#Getting-started)
+    - [I like fruits](#I-like-fruits)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -66,6 +67,52 @@ The goal of this section is to progressively explore how promises work in the co
 We will implement an example where the AI model selects a random fruit, describes its characteristics, and then suggests a similar fruit. This exercise will demonstrate how promises enable AI-driven reasoning to be chained in an elegant and scalable way.
 
 By the end of this section, you will have a solid understanding of how to use `ASync.Promise` to manage complex AI interactions in a structured and efficient manner.
+
+<br/>
+
+## I like fruits
+
+### Step 1 : The promise method
+
+We design a configurable Promise method to adapt it to each stage of processing while avoiding nested calls, which, although possible, go against the Promise pattern. The main objective is to ensure clear, scalable, and easily maintainable code.
+
+```Delphi
+//uses GenAI, GenAI.Types, ASync.Promise;
+
+   function CreateChatPromise(const Msg: string): TPromise<string>;
+begin
+  var Client := TGenAIFactory.CreateInstance(My_Key);
+
+  Result := TPromise<string>.Create(
+    procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
+    begin
+      Client.Chat.AsynCreate(
+        procedure(Params: TChatParams)
+        begin
+          Params.Model('gpt-4o');
+          Params.Messages([
+            FromUser(Msg)
+          ]);
+        end,
+        function: TAsynChat
+        begin
+          Result.OnSuccess :=
+            procedure(Sender: TObject; Chat: TChat)
+            begin
+              Resolve(Chat.Choices[0].Message.Content);
+            end;
+          Result.OnError :=
+            procedure(Sender: TObject; ErrorMessage: string)
+            begin
+              Reject(Exception.Create(ErrorMessage));
+            end;
+        end);
+    end);
+end; 
+```
+
+>[!NOTE]
+> We use the ***GenAI*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
 
 <br/>
 
