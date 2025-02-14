@@ -375,7 +375,7 @@ end;
 Due to the size of the method implementation, please refer to the [Main.pas](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/sample/Main.pas) file located in the sample folder.
 
 Example Execution
-![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Promise.png?raw=true "Preview")
+![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/DocCreator.png?raw=true "Preview")
 
 >[!TIP]
 > Use the provided executable example for the VCL framework. Of course, you can also develop an equivalent version for the FMX framework.
