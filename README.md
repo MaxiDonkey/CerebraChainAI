@@ -214,6 +214,11 @@ Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner
 
 <br/>
 
+Example Execution
+![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Promise.png?raw=true "Preview")
+
+<br/>
+
 ### Advantages 
 
 The use of ***promises*** to interact with a generative model offers several key advantages, particularly in terms of ***asynchronous management, code readability, and structuring successive calls***. Here are the main benefits, illustrated with concrete examples:
