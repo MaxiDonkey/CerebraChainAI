@@ -211,6 +211,9 @@ Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner
 
 **What fascinates me about this mechanism is that it all comes down to a single instruction.**
 
+<br/>
+
+![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Promise.png?raw=true "Preview")
 
 <br/>
 
