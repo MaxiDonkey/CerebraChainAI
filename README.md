@@ -234,6 +234,12 @@ The use of ***promises*** to interact with a generative model offers several key
 
 ### Prompt and response using JSON
 
+In this more advanced example, we will build a prompt in multiple stages, ensuring that each step generates a response formatted in JSON. These responses will be progressively compiled and integrated to form a final prompt, which will then be executed. 
+
+This approach transforms a single request into multiple sub-requests that are systematically analyzed. By applying this process across several stages, we enhance the relevance of the final response from the outset.
+
+Here, I will only describe step 1 and the construction of the promise. The rest of the code will be provided along with the test application and the source code.
+
 <br/>
 
 # Transforming a Synchronous Function into an Asynchronous One
