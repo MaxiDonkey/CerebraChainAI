@@ -27,11 +27,11 @@ The **ASync.Promise** unit integrates seamlessly with existing wrappers:
 - [Deepseek](https://github.com/MaxiDonkey/DelphiDeepseek)  
 - [GenAI for OpenAI](https://github.com/MaxiDonkey/DelphiGenAI)  
 
-Simply adding this unit is **enough** to benefit from optimized promise management, as the asynchronous mechanism is already handled by the **Async.Params** and **Async.Support** units in these projects.  
+Simply adding this unit is **enough** to benefit from optimized promise management, as the asynchronous mechanism is already handled by the `Async.Params` and `Async.Support` units in these projects.  
 
 
 
-Additionally, **we will explore how to extend a synchronous function into an asynchronous one** using the mechanics provided by the **Async.Params** and **Async.Support** units. This approach does **not** rely on promises but rather on a structured asynchronous framework that enables a smooth transition without requiring a complete code rewrite.  
+Additionally, **we will explore how to extend a synchronous function into an asynchronous one** using the mechanics provided by the `Async.Params` and `Async.Support` units. This approach does **not** rely on promises but rather on a structured asynchronous framework that enables a smooth transition without requiring a complete code rewrite.  
 
 We will emphasize:  
 - **Necessary prerequisites** to enable this mechanism  
@@ -40,7 +40,7 @@ We will emphasize:
 
 
 
-**In summary, ASync.Promise provides promise-based management tailored for generative models, while Async.Params and Async.Support make it easy to extend synchronous functions into asynchronous ones, enhancing performance and responsiveness in applications.**  
+**In summary, `ASync.Promise` provides promise-based management tailored for generative models, while `Async.Params` and `Async.Support` make it easy to extend synchronous functions into asynchronous ones, enhancing performance and responsiveness in applications.**  
 
 <br/>
 
