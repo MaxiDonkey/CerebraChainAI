@@ -116,6 +116,26 @@ We can observe that this method is asynchronous; it calls the `Client.Chat.Async
 >[!NOTE]
 > We use the ***GenAI*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
 
+In the `OnSuccess` section of the **Client.Chat.AsyncCreate** callback, we utilized the `Resolve` method of the promise to indicate that capturing the message content from the **GPT-4o** model's response to our request signifies a successful completion of this step.
+
+```Delphi
+Result.OnSuccess :=
+  procedure(Sender: TObject; Chat: TChat)
+  begin
+    Resolve(Chat.Choices[0].Message.Content);
+  end;
+```
+
+In the OnError section of the Client.Chat.AsyncCreate callback, we utilized the Reject method to capture and propagate the exception.
+
+```Delphi
+Result.OnError :=
+  procedure(Sender: TObject; ErrorMessage: string)
+  begin
+    Reject(Exception.Create(ErrorMessage));
+  end;
+```
+
 <br/>
 
 # Transforming a Synchronous Function into an Asynchronous One
