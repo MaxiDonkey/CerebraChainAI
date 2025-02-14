@@ -15,6 +15,9 @@ ___
     - [Advantages ](#Advantages )
     - [Prompt and response using JSON](#Prompt-and-response-using-JSON)
 - [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
+    - [Synchronous method](#Synchronous-method)
+    - [Asynchronous method](#Asynchronous-method)
+    - [Use case](#Use-case)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -391,6 +394,8 @@ Now, we will move on to a new section focused on transforming a synchronous func
 
 # Transforming a Synchronous Function into an Asynchronous One
 
+## Synchronous method
+
 The mechanism for extending a synchronous function into an asynchronous one requires that the functions you create must return a class instance. This prerequisite ensures proper handling within the asynchronous framework.
 
 ```Delphi
@@ -420,6 +425,8 @@ All possible scenarios are considered.
 > It is essential that DoSomething returns a class instance.
 
 All the necessary conditions are met to extend DoSomething into an asynchronous method.
+
+## Asynchronous method
 
 To achieve this, ensure that the `Async.Support` unit is included in the uses section. Then, declare a new type based on the generic `TAsynCallBack<T>`. The generic parameter `T` must now be resolved and will naturally be substituted by the `TResultFunction` class.
 
@@ -472,6 +479,8 @@ end;
 I have marked the sections that may vary between asynchronous methods with the label "variable element." As you can see, very few elements actually change.
 
 This concludes this section; everything is now in place.
+
+## Use case
 
 Now, let's look at how this function is called.
 
