@@ -10,11 +10,11 @@ ___
 
 - [Introduction](#Introduction)
 - [Managing Promises and Thought Chains with Generative AI Models](#Managing-Promises-and-Thought-Chains-with-Generative-AI-Models)
-- [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
     - [Getting started](#Getting-started)
     - [I like fruits](#I-like-fruits)
     - [Advantages ](#Advantages )
     - [Prompt and response using JSON](#Prompt-and-response-using-JSON)
+- [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
 - [Contributing](#contributing)
 - [License](#license)
 
