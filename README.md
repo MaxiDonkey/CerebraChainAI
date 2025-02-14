@@ -482,7 +482,7 @@ This concludes this section; everything is now in place.
 
 ## Use case
 
-Now, let's look at how this function is called.
+Now, let's look at how this method is called.
 
 *MyClass is an instance of the TMyClass class.*
 ```Delphi
