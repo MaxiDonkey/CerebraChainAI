@@ -238,7 +238,11 @@ In this more advanced example, we will build a prompt in multiple stages, ensuri
 
 This approach transforms a single request into multiple sub-requests that are systematically analyzed. By applying this process across several stages, we enhance the relevance of the final response from the outset.
 
-Here, I will only describe step 1 and the construction of the promise. The rest of the code will be provided along with the test application and the source code.
+Here, I will only describe step 1, 2 and final step and the construction of the promise. The rest of the code will be provided along with the test application and the source code.
+
+<br/>
+
+#### Prompts
 
 We will use eight prompts throughout the chained processing.
 
@@ -262,6 +266,107 @@ Respond using the following JSON format and only this format and no code contain
 ```
 *Comment:* We will format it to include the question to be addressed on the first line.
 
+<br/>
+
+For the second step, we will use the following prompt:
+
+```Prompt
+%s
+Based on the previous JSON, break down the question into sub-themes:
+- Identify all major areas of analysis (for example, if the question is "What are the impacts of remote work on productivity?", separate the analysis into "Work Organization", "Social Impacts", "Technological Aspects", "Economic Aspects", etc.).
+- For each area, formulate more specific sub-questions.
+
+Respond using the following JSON format and only this format and no code container:
+{
+  "context": {
+    "question": "Exact title or wording of the question",
+    "objectives": "What we aim to understand, demonstrate, defend, challenge, analyze, or explain",
+    "scope": "Scope or limitations (timeframe, geography, etc.)"
+  },
+  "themes": [
+    {
+      "theme_name": "Theme name",
+      "key_points": [
+        "Key idea 1",
+        "Key idea 2",
+        "Key idea 3"
+      ]
+    }
+    // Repeat for each theme
+  ]
+}
+```
+*Comment:* This time, we will format the result from the previous step as JSON by passing it to the prompt.
+
+<br/>
+
+And so on throughout the entire process.
+
+In the final step, we will provide the JSON-formatted result from the penultimate step and request the generation of a well-documented document based on all the collected information.
+
+For the final step, we will use following prompt:
+
+```Prompt
+%s
+Write an article with a philosophical approach to answer the question from the previous JSON, using the information contained in that same JSON.
+- Use an unconventional yet accurate tone to captivate the reader.
+- Pay close attention to clarity, relevance, and originality in the writing.
+``` 
+*Comment:* This time, we will format the result from the previous step as JSON by passing it to the prompt.
+
+<br/>
+
+The prompts for the intermediate steps can be found in the source files, serving as a reference for the demo application.
+
+<br/>
+
+#### The promise
+
+The code used for the promise is as follows:
+
+```Delphi
+//uses GenAI, GenAI.Types, ASync.Promise;
+function CreateDocCreatorPromise(const Prompt: string; const Developer: string = ''): TPromise<string>;
+begin
+  var Client := TGenAIFactory.CreateInstance(My_Key);
+
+  Result := TPromise<string>.Create(
+    procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
+    begin
+      var Messages := TJSONArray.Create;
+
+      if not Developer.Trim.IsEmpty then
+        Messages.Add(FromDeveloper(Developer).Detach);
+
+      if Prompt.Trim.IsEmpty then
+        raise Exception.Create('Prompt can''t be null');
+      Messages.Add(FromUser(Prompt).Detach);
+
+      Client.Chat.AsynCreate(
+        procedure(Params: TChatParams)
+        begin
+          Params.Model('gpt-4o');
+          Params.Messages(Messages);
+        end,
+        function: TAsynChat
+        begin
+          Result.OnSuccess :=
+            procedure(Sender: TObject; Chat: TChat)
+            begin
+              Resolve(Chat.Choices[0].Message.Content);
+            end;
+          Result.OnError :=
+            procedure(Sender: TObject; ErrorMessage: string)
+            begin
+              Reject(Exception.Create(ErrorMessage));
+            end;
+        end);
+    end);
+end;
+```
+
+>[!NOTE]
+> Note that in this example, we use only one type of configurable promise. However, it would be entirely possible to use multiple, each with distinct functionalities—some relying on data from a database, while others leverage your own code. This approach enables seamless integration of various tools, making it easier to build modern applications that utilize artificial intelligence while remaining adaptable to other use cases. It is the ideal combination.
 
 <br/>
 
