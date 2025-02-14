@@ -19,7 +19,7 @@ uses
 
 const
   My_Key = 'YOUR_OPENAI_KEY';
-  PATH = '..\..\prompts\';
+  PATH = '..\..\..\prompts\';
 
 
 type
