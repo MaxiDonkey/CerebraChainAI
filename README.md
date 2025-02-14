@@ -368,6 +368,114 @@ end;
 >[!NOTE]
 > Note that in this example, we use only one type of configurable promise. However, it would be entirely possible to use multiple, each with distinct functionalities—some relying on data from a database, while others leverage your own code. This approach enables seamless integration of various tools, making it easier to build modern applications that utilize artificial intelligence while remaining adaptable to other use cases. It is the ideal combination.
 
+#### The resolution chain
+
+```Delphi
+CreateChatPromise(PromptStep1)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, 'Contextualize the request for clarification' + sLineBreak + Value);
+        Display(Memo1, sLineBreak + 'Identify all major areas of analysis' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('step2.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Display(Memo1, sLineBreak + 'Define a response (or data) structure' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('step3.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Display(Memo1, sLineBreak + 'Identify relevant sources (articles, studies, official reports, reference books).' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('step4.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Display(Memo1, sLineBreak + 'Analyze and synthesize the information' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('step5.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Display(Memo1, sLineBreak + 'Formulate a comprehensive and coherent response' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('step6.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Display(Memo1, sLineBreak + 'Reserve a section for the conclusion and perspectives' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('step7.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Display(Memo1, sLineBreak + 'Write an article with a philosophical approach' + sLineBreak);
+        Result := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(PromptStep('finalstep.txt', Value));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Display(Memo1, Value + sLineBreak);
+        Result := Value;
+      end)
+   .&Catch(
+     procedure(E: Exception)
+     begin
+       Display(Memo1, 'Erreur : ' + E.Message);
+     end);
+```
+
 <br/>
 
 # Transforming a Synchronous Function into an Asynchronous One
