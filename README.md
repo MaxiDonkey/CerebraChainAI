@@ -110,11 +110,12 @@ begin
     end);
 end; 
 ```
-
-We can observe that this method is asynchronous; it calls the `Client.Chat.AsyncCreate` method.
-
 >[!NOTE]
 > We use the ***GenAI*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
+
+<br/>
+
+We can observe that this method is asynchronous; it calls the `Client.Chat.AsyncCreate` method.
 
 In the `OnSuccess` section of the **Client.Chat.AsyncCreate** callback, we utilized the `Resolve` method of the promise to indicate that capturing the message content from the **GPT-4o** model's response to our request signifies a successful completion of this step.
 
