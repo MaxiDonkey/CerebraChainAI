@@ -1,0 +1,24 @@
+%s
+Based on the previous JSON, break down the question into sub-themes:
+- Identify all major areas of analysis (for example, if the question is "What are the impacts of remote work on productivity?", separate the analysis into "Work Organization", "Social Impacts", "Technological Aspects", "Economic Aspects", etc.).
+- For each area, formulate more specific sub-questions.
+
+Respond using the following JSON format and only this format and no code container:
+{
+  "context": {
+    "question": "Exact title or wording of the question",
+    "objectives": "What we aim to understand, demonstrate, defend, challenge, analyze, or explain",
+    "scope": "Scope or limitations (timeframe, geography, etc.)"
+  },
+  "themes": [
+    {
+      "theme_name": "Theme name",
+      "key_points": [
+        "Key idea 1",
+        "Key idea 2",
+        "Key idea 3"
+      ]
+    }
+    // Repeat for each theme
+  ]
+}
