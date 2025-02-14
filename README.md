@@ -9,6 +9,8 @@ ___
 <br/>
 
 - [Introduction](#Introduction)
+- [Managing Promises and Thought Chains with Generative AI Models](#Managing-Promises-and-Thought-Chains-with-Generative-AI-Models)
+- [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -41,6 +43,14 @@ We will emphasize:
 <br/>
 
 **In summary, `ASync.Promise` provides promise-based management tailored for generative models, while `Async.Params` and `Async.Support` make it easy to extend synchronous functions into asynchronous ones, enhancing performance and responsiveness in applications.**  
+
+<br/>
+
+# Managing Promises and Thought Chains with Generative AI Models
+
+<br/>
+
+# Transforming a Synchronous Function into an Asynchronous One
 
 <br/>
 
