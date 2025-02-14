@@ -13,6 +13,7 @@ ___
 - [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
     - [Getting started](#Getting-started)
     - [I like fruits](#I-like-fruits)
+    - [Advantages ](#Advantages )
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -210,6 +211,18 @@ Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner
 > Execution is asynchronous. It is crucial to ensure that the chained instruction is constructed as a single, continuous statement to avoid introducing intermediate processing steps, which would inherently be synchronous.
 
 **What fascinates me about this mechanism is that it all comes down to a single instruction.**
+
+<br/>
+
+### Advantages 
+
+The use of ***promises*** to interact with a generative model offers several key advantages, particularly in terms of ***asynchronous management, code readability, and structuring successive calls***. Here are the main benefits, illustrated with concrete examples:
+
+- **Building structured thought chains to guide the AI toward more precise responses:** Promises help organize a logical sequence of interactions with the generative model while avoiding excessive callback nesting (callback hell).
+
+- **Facilitating modularity and reusability of AI calls for scalable projects:** Promises allow AI actions to be encapsulated in reusable functions, making the code more modular and easily adaptable to different use cases.
+
+- **Providing an interactive interface where users can progressively refine an AI-generated idea:** An application can take into account successive corrections and dynamically adjust the response accordingly.
 
 <br/>
 
