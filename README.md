@@ -18,7 +18,7 @@ ___
 
 In the realm of asynchronous development with Delphi, **managing promises and thought chains** is essential for fully leveraging the power of generative AI models. This project provides a flexible and modular solution to efficiently structure one's reasoning (**thought chains**) while interacting with models like **OpenAI, Claude, Gemini, Mistral, GroqCloud, Hugging Face, and Deepseek**.  
 
-The **ASync.Promise** unit integrates seamlessly with existing wrappers:  
+The `ASync.Promise` unit integrates seamlessly with existing wrappers:  
 - [Anthropic (Claude)](https://github.com/MaxiDonkey/DelphiAnthropic)  
 - [Google (Gemini)](https://github.com/MaxiDonkey/DelphiGemini)  
 - [Mistral](https://github.com/MaxiDonkey/DelphiMistralAI)  
