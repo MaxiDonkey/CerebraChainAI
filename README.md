@@ -139,7 +139,7 @@ Result.OnError :=
 
 <br/>
 
-### Chained methods for structured handling
+### Step 2 : Chained methods for structured handling
 
 - &Then<T>: Chains operations to execute after a promise resolves.
 - &Catch: Handles errors occurring within a promise chain.
