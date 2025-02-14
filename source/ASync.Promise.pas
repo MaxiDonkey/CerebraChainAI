@@ -285,36 +285,39 @@ begin
     procedure(Resolve: TProc<TResult>; Reject: TProc<Exception>)
     begin
       if FState = psFulfilled then
-      begin
-        try
-          Resolve(AOnFulfill(FValue));
-        except
-          on E: Exception do
-            Reject(E);
-        end;
-      end
-      else if FState = psRejected then
-        Reject(FError)
+        begin
+          try
+            Resolve(AOnFulfill(FValue));
+          except
+            on E: Exception do
+              Reject(E);
+          end;
+        end
       else
-      begin
-        {--- If the operation is not yet complete, we add callbacks for chaining }
-        FThenHandlers.Add(
-            procedure(Value: T)
-            begin
-              try
-                Resolve(AOnFulfill(Value));
-              except
-                on E: Exception do
-                  Reject(E);
-              end;
-            end);
+      if FState = psRejected then
+        begin
+          Reject(FError)
+        end
+      else
+        begin
+          {--- If the operation is not yet complete, we add callbacks for chaining }
+          FThenHandlers.Add(
+              procedure(Value: T)
+              begin
+                try
+                  Resolve(AOnFulfill(Value));
+                except
+                  on E: Exception do
+                    Reject(E);
+                end;
+              end);
 
-        FCatchHandlers.Add(
-          procedure(E: Exception)
-          begin
-            Reject(E);
-          end);
-      end;
+          FCatchHandlers.Add(
+            procedure(E: Exception)
+            begin
+              Reject(E);
+            end);
+        end;
     end);
 end;
 
