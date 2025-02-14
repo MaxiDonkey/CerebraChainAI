@@ -231,10 +231,6 @@ The use of ***promises*** to interact with a generative model offers several key
 
 <br/>
 
-![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Promise.png?raw=true "Preview")
-
-<br/>
-
 # Transforming a Synchronous Function into an Asynchronous One
 
 <br/>
