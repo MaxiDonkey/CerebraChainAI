@@ -14,6 +14,7 @@ ___
     - [Getting started](#Getting-started)
     - [I like fruits](#I-like-fruits)
     - [Advantages ](#Advantages )
+    - [Prompt and response using JSON](#Prompt-and-response-using-JSON)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -228,6 +229,10 @@ The use of ***promises*** to interact with a generative model offers several key
 - **Facilitating modularity and reusability of AI calls for scalable projects:** Promises allow AI actions to be encapsulated in reusable functions, making the code more modular and easily adaptable to different use cases.
 
 - **Providing an interactive interface where users can progressively refine an AI-generated idea:** An application can take into account successive corrections and dynamically adjust the response accordingly.
+
+<br/>
+
+### Prompt and response using JSON
 
 <br/>
 
