@@ -184,7 +184,7 @@ type
   end;
 
 var
-  PromizeList: TObjectList<TObject>;
+  PromiseList: TObjectList<TObject>;
 
 implementation
 
@@ -194,7 +194,7 @@ constructor TPromise<T>.Create(AExecutor: TExecutor);
 begin
   inherited Create;
   FState := psPending;
-  PromizeList.Add(Self);
+  PromiseList.Add(Self);
   FThenHandlers := TList<TProc<T>>.Create;
   FCatchHandlers := TList<TProc<Exception>>.Create;
   try
@@ -593,7 +593,7 @@ begin
 end;
 
 initialization
-  PromizeList := TObjectList<TObject>.Create(True);
+  PromiseList := TObjectList<TObject>.Create(True);
 finalization
-  PromizeList.Free;
+  PromiseList.Free;
 end.
