@@ -478,6 +478,16 @@ CreateChatPromise(PromptStep1)
 
 <br/>
 
+#### Conclusion
+
+In this tutorial, we have explored only a fraction of the possibilities offered by this technique. Many use cases that were once complex to implement are now easily accessible with minimal effort.
+
+I encourage you to take full advantage of this mechanism, as it can undoubtedly be adapted to various and innovative use cases based on your needs.
+
+Now, we will move on to a new section focused on transforming a synchronous function into an asynchronous method, emphasizing a simple and effective approach. The connection with promises is clear: this transition will allow you to integrate these concepts into your own asynchronous methods and optimize their management.
+
+<br/>
+
 # Transforming a Synchronous Function into an Asynchronous One
 
 <br/>
