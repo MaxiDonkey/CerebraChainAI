@@ -79,7 +79,7 @@ We design a configurable Promise method to adapt it to each stage of processing 
 ```Delphi
 //uses GenAI, GenAI.Types, ASync.Promise;
 
-   function CreateChatPromise(const Prompt: string): TPromise<string>;
+function CreateChatPromise(const Prompt: string): TPromise<string>;
 begin
   var Client := TGenAIFactory.CreateInstance(My_Key);
 
@@ -110,6 +110,8 @@ begin
     end);
 end; 
 ```
+
+We can observe that this method is asynchronous; it calls the Client.Chat.AsyncCreate method.
 
 >[!NOTE]
 > We use the ***GenAI*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
