@@ -79,7 +79,7 @@ We design a configurable Promise method to adapt it to each stage of processing 
 ```Delphi
 //uses GenAI, GenAI.Types, ASync.Promise;
 
-   function CreateChatPromise(const Msg: string): TPromise<string>;
+   function CreateChatPromise(const Prompt: string): TPromise<string>;
 begin
   var Client := TGenAIFactory.CreateInstance(My_Key);
 
@@ -91,7 +91,7 @@ begin
         begin
           Params.Model('gpt-4o');
           Params.Messages([
-            FromUser(Msg)
+            FromUser(Prompt)
           ]);
         end,
         function: TAsynChat
