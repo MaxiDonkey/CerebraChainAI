@@ -490,15 +490,15 @@ Now, let's look at how this method is called.
           ParamString,
           function : TAsynResultFunction
           begin
-             Result.sender := nil; //or an instante
+             Result.sender := nil; //or an instance
              Result.OnStart :=
                procedure (Sender: TObject)
                begin
 
                end;
              Result.OnSuccess :=
-               procedure (Sender: TObject; Value: TResultFunction)
-               begin
+               procedure (Sender: TObject; Value: TResultFunction)  //if Result.sender is not nil, then the Sender parameter of this procedure 
+               begin                                               // will be assigned the value of Result.sender.                 
 
                end;
              Result.OnError :=
