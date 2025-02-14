@@ -240,6 +240,29 @@ This approach transforms a single request into multiple sub-requests that are sy
 
 Here, I will only describe step 1 and the construction of the promise. The rest of the code will be provided along with the test application and the source code.
 
+We will use eight prompts throughout the chained processing.
+
+The first prompt is structured as follows:
+
+```Prompt
+%s
+To contextualize the request for clarification and to define the question's scope:
+- Identify the exact subject and the intended objectives (inform, explain, persuade, etc.).
+- Determine the geographical scope, historical period (if applicable), or disciplinary field to avoid any confusion.
+- Reasonably broaden the question.
+
+Respond using the following JSON format and only this format and no code container:
+{
+  "context": {
+    "question": "Exact title or statement of the question",
+    "objectives": "What is being sought to understand, demonstrate, defend, challenge, analyze, or explain",
+    "scope": "Scope or limitations (timeframe, geography, etc.)"
+  }
+}
+```
+*Comment:* We will format it to include the question to be addressed on the first line.
+
+
 <br/>
 
 # Transforming a Synchronous Function into an Asynchronous One
