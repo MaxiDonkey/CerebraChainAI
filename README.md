@@ -531,7 +531,7 @@ To achieve this, ensure that the `Async.Support` unit is included in the uses se
 
 We can now declare the asynchronous method `AsynDoSomething` within `TMyClass`.
 
-Although it is possible to use the same name as the synchronous method and apply the overload directive, this may present challenges when generating XML documentation. In particular, XML documentation tools often struggle to correctly differentiate between overloaded methods, frequently applying the same contextual help message to both. This can be problematic if each method has distinct comments tailored to its specific behavior.
+Although it is possible to use the same name as the synchronous method and apply the `overload` directive, this may present challenges when generating XML documentation. In particular, XML documentation tools often struggle to correctly differentiate between overloaded methods, frequently applying the same contextual help message to both. This can be problematic if each method has distinct comments tailored to its specific behavior.
 
 To avoid any ambiguity, we will adopt a cautious approach in this example by giving the asynchronous method a distinct name, prefixing it with `Asyn` to clearly differentiate it from its synchronous counterpart.
 
