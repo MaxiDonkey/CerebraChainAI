@@ -22,14 +22,14 @@ The **ASync.Promise** unit integrates seamlessly with existing wrappers:
 - [Anthropic (Claude)](https://github.com/MaxiDonkey/DelphiAnthropic)  
 - [Google (Gemini)](https://github.com/MaxiDonkey/DelphiGemini)  
 - [Mistral](https://github.com/MaxiDonkey/DelphiMistralAI)  
-- [GroqCloud](https://github.com/MaxiDonkey/DelphiStabilityAI)  
+- [GroqCloud](https://github.com/MaxiDonkey/DelphiGroqCloud)  
 - [Hugging Face](https://github.com/MaxiDonkey/DelphiHuggingFace)  
 - [Deepseek](https://github.com/MaxiDonkey/DelphiDeepseek)  
 - [GenAI for OpenAI](https://github.com/MaxiDonkey/DelphiGenAI)  
 
 Simply adding this unit is **enough** to benefit from optimized promise management, as the asynchronous mechanism is already handled by the `Async.Params` and `Async.Support` units in these projects.  
 
-
+<br/>
 
 Additionally, **we will explore how to extend a synchronous function into an asynchronous one** using the mechanics provided by the `Async.Params` and `Async.Support` units. This approach does **not** rely on promises but rather on a structured asynchronous framework that enables a smooth transition without requiring a complete code rewrite.  
 
@@ -38,7 +38,7 @@ We will emphasize:
 - **Step-by-step methodology** for implementation  
 - **How it improves scalability and responsiveness**  
 
-
+<br/>
 
 **In summary, `ASync.Promise` provides promise-based management tailored for generative models, while `Async.Params` and `Async.Support` make it easy to extend synchronous functions into asynchronous ones, enhancing performance and responsiveness in applications.**  
 
