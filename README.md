@@ -167,8 +167,7 @@ Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner
 
   Memo1.Lines.Add('>>>>>> New attempt');
 
-
-  
+ 
   CreateChatPromise(Format(Prompt1, [LastChoice]))                 //Create the promise
    .&Then<string>(
       function(Value: string): string
@@ -370,111 +369,13 @@ end;
 
 #### The resolution chain
 
-```Delphi
-CreateChatPromise(PromptStep1)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, 'Contextualize the request for clarification' + sLineBreak + Value);
-        Display(Memo1, sLineBreak + 'Identify all major areas of analysis' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('step2.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Display(Memo1, sLineBreak + 'Define a response (or data) structure' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('step3.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Display(Memo1, sLineBreak + 'Identify relevant sources (articles, studies, official reports, reference books).' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('step4.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Display(Memo1, sLineBreak + 'Analyze and synthesize the information' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('step5.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Display(Memo1, sLineBreak + 'Formulate a comprehensive and coherent response' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('step6.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Display(Memo1, sLineBreak + 'Reserve a section for the conclusion and perspectives' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('step7.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Display(Memo1, sLineBreak + 'Write an article with a philosophical approach' + sLineBreak);
-        Result := Value;
-      end)
-   .&Then(
-     function(Value: string): TPromise<string>
-     begin
-       {--- We return the new promise directly without nesting the code }
-       Result := CreateChatPromise(PromptStep('finalstep.txt', Value));
-     end)
-   .&Then<string>(
-      function(Value: string): string
-      begin
-        Display(Memo1, Value + sLineBreak);
-        Result := Value;
-      end)
-   .&Catch(
-     procedure(E: Exception)
-     begin
-       Display(Memo1, 'Erreur : ' + E.Message);
-     end);
-```
+Due to the size of the method implementation, please refer to the [Main.pas](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/sample/Main.pas) file located in the sample folder.
+
+Example Execution
+![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Promise.png?raw=true "Preview")
+
+>[!TIP]
+> Use the provided executable example for the VCL framework. Of course, you can also develop an equivalent version for the FMX framework.
 
 <br/>
 
