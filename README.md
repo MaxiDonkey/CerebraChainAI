@@ -55,7 +55,7 @@ We will emphasize:
 
 To understand how to effectively manage promises and structure thought chains with generative AI models, we will start with a simple yet concrete example. This exercise will help us grasp the underlying mechanisms and see how promises facilitate clear and structured asynchronous execution.
 
-For this demonstration, we will use the GenAI wrapper for OpenAI (DelphiGenAI). This choice allows us to illustrate how promises streamline interactions with large language models, making multi-step reasoning more intuitive and manageable.
+For this demonstration, we will use the [GenAI wrapper for OpenAI](https://github.com/MaxiDonkey/DelphiGenAI) (DelphiGenAI). This choice allows us to illustrate how promises streamline interactions with large language models, making multi-step reasoning more intuitive and manageable.
 
 The goal of this section is to progressively explore how promises work in the context of generative AI by building a structured thought chain. This will allow us to:
 
