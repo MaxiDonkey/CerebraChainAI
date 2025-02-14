@@ -200,16 +200,15 @@ begin
   try
     {--- The executor function that starts the asynchronous task. }
     AExecutor(
-      TProc<T>(
-        procedure(const AValue: T)
+        procedure(AValue: T)
         begin
           Self.Resolve(AValue);
-        end),
-      TProc<Exception>(
-        procedure(const E: Exception)
+        end,
+
+        procedure(E: Exception)
         begin
           Self.Reject(E);
-        end)
+        end
     );
   except
     on E: Exception do
@@ -300,8 +299,7 @@ begin
       begin
         {--- If the operation is not yet complete, we add callbacks for chaining }
         FThenHandlers.Add(
-          TProc<T>(
-            procedure(const Value: T)
+            procedure(Value: T)
             begin
               try
                 Resolve(AOnFulfill(Value));
@@ -309,13 +307,13 @@ begin
                 on E: Exception do
                   Reject(E);
               end;
-            end)
-          );
+            end);
+
         FCatchHandlers.Add(
-          TProc<Exception>(procedure(const E: Exception)
+          procedure(E: Exception)
           begin
             Reject(E);
-          end));
+          end);
       end;
     end);
 end;
@@ -330,17 +328,15 @@ begin
             try
               AOnFulfill(FValue)
                 .&Then(
-                  TProc<T>(
-                  procedure(const NewValue: T)
+                  procedure(NewValue: T)
                   begin
                     Resolve(NewValue);
-                  end))
+                  end)
                 .&Catch(
-                  TProc<Exception>(
-                  procedure(const E: Exception)
+                  procedure(E: Exception)
                   begin
                     Reject(E);
-                  end));
+                  end);
             except
               on E: Exception do
                 Reject(E);
@@ -354,36 +350,31 @@ begin
         else
           begin
             FThenHandlers.Add(
-              TProc<T>(
-                procedure(const Value: T)
+                procedure(Value: T)
                 begin
                   try
                     AOnFulfill(Value)
                       .&Then(
-                        TProc<T>(
-                          procedure(const NewValue: T)
+                          procedure(NewValue: T)
                           begin
                             Resolve(NewValue);
-                          end))
+                          end)
                       .&Catch(
-                        TProc<Exception>(
-                          procedure(const E: Exception)
+                          procedure(E: Exception)
                           begin
                             Reject(E);
-                          end)
-                        );
+                          end);
                   except
                     on E: Exception do
                       Reject(E);
                   end;
-                end)
+                end
               );
             FCatchHandlers.Add(
-              TProc<Exception>(
-              procedure(const E: Exception)
+              procedure(E: Exception)
               begin
                 Reject(E);
-              end));
+              end);
           end;
       end);
 end;
@@ -413,8 +404,7 @@ begin
         begin
           {--- If the promise is pending, we add callbacks }
           FThenHandlers.Add(
-            TProc<T>(
-              procedure(const Value: T)
+              procedure(Value: T)
               begin
                 try
                   Resolve(AOnFulfill());
@@ -422,14 +412,12 @@ begin
                   on E: Exception do
                     Reject(E);
                 end;
-              end));
+              end);
           FCatchHandlers.Add(
-            TProc<Exception>(
-              procedure(const E: Exception)
+              procedure(E: Exception)
               begin
                 Reject(E);
-              end)
-            );
+              end);
         end;
     end);
 end;
@@ -445,19 +433,15 @@ begin
           try
             AOnFulfill(FValue)
               .&Then(
-                TProc<TResult>(
-                  procedure(const NewValue: TResult)
+                  procedure(NewValue: TResult)
                   begin
                     Resolve(NewValue);
                   end)
-                )
               .&Catch(
-                TProc<Exception>(
-                  procedure(const E: Exception)
+                  procedure(E: Exception)
                   begin
                     Reject(E);
-                  end)
-                );
+                  end);
           except
             on E: Exception do
               Reject(E);
@@ -471,37 +455,30 @@ begin
       else
         begin
           FThenHandlers.Add(
-            TProc<T>(
-              procedure(const Value: T)
+              procedure(Value: T)
               begin
                 try
                   AOnFulfill(Value)
                     .&Then(
-                      TProc<TResult>(
-                        procedure(const NewValue: TResult)
+                        procedure(NewValue: TResult)
                         begin
                           Resolve(NewValue);
                         end)
-                      )
                     .&Catch(
-                      TProc<Exception>(
-                        procedure(const E: Exception)
+                        procedure(E: Exception)
                         begin
                           Reject(E);
-                        end)
-                      );
+                        end);
                 except
                   on E: Exception do
                     Reject(E);
                 end;
-              end));
+              end);
           FCatchHandlers.Add(
-            TProc<Exception>(
-              procedure(const E: Exception)
+              procedure(E: Exception)
               begin
                 Reject(E);
-              end)
-            );
+              end);
         end;
     end);
 end;
@@ -532,8 +509,7 @@ begin
         begin
           {--- If the operation is not yet completed, add callbacks for chaining }
           FThenHandlers.Add(
-            TProc<T>(
-              procedure(const Value: T)
+              procedure(Value: T)
               begin
                 try
                   AOnFulfill;
@@ -542,15 +518,12 @@ begin
                   on E: Exception do
                     Reject(E);
                 end;
-              end)
-            );
+              end);
           FCatchHandlers.Add(
-            TProc<Exception>(
-              procedure(const E: Exception)
+              procedure(E: Exception)
               begin
                 Reject(E);
-              end)
-            );
+              end);
         end;
     end);
 end;
@@ -574,20 +547,16 @@ begin
         else
           begin
             FThenHandlers.Add(
-              TProc<T>(
-                procedure(const Value: T)
+                procedure(Value: T)
                 begin
                   Resolve(Value);
-                end)
-            );
+                end);
             FCatchHandlers.Add(
-              TProc<Exception>(
-                procedure(const E: Exception)
+                procedure(E: Exception)
                 begin
                   AOnReject(E);
                   Reject(E);
-                end)
-              );
+                end);
           end;
       end);
 end;
