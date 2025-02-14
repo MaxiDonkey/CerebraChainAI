@@ -139,6 +139,76 @@ Result.OnError :=
 
 <br/>
 
+### Chained methods for structured handling
+
+- &Then<T>: Chains operations to execute after a promise resolves.
+- &Catch: Handles errors occurring within a promise chain.
+
+These abstractions enable a structured and reusable design.
+Avoid deeply nested callbacks as much as possible, as this facilitates a cleaner approach to asynchronous programming in Delphi.
+
+>[!TIP]
+> A TMemo component was placed on a form to display the obtained results.
+
+<br/>
+
+```Delphi
+//uses GenAI, GenAI.Types, ASync.Promise;
+
+  LastChoice: string = 'cherry'; //The gpt-4o model does not handle randomness very well, so to avoid repeating the same choice consecutively
+
+  var Prompt1 := 'From the array ["apple", "banana", "orange", "tomato", "nut", "tangerine", "pear", "cherry"], pick a random item. Always respond with ONE word. You can''t choice %s';
+
+  var Prompt2 := 'Indicate with a short sentence the characteristics of the fruit. : %s.';
+
+  var Prompt3 := 'Name another fruit that resembles : %s';
+
+  Memo1.Lines.Add('>>>>>> New attempt');
+
+
+  
+  CreateChatPromise(Format(Prompt1, [LastChoice]))                 //Create the promise
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Memo1.Lines.Add('Step 1: ' + Value);
+        Result := Value;
+        LastChoice := Value;
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+       {--- We return the new promise directly without nesting the code }
+       Result := CreateChatPromise(Format(Prompt2, [Value]));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Result := Value;
+        Memo1.Lines.Add('Step 2: ' + Value);
+      end)
+   .&Then(
+     function(Value: string): TPromise<string>
+     begin
+        {--- We return the new promise directly without nesting the code }
+        Result := CreateChatPromise(Format(Prompt3, [Value]));
+     end)
+   .&Then<string>(
+      function(Value: string): string
+      begin
+        Result := Value;
+        Memo1.Lines.Add('Step 3: ' + Value);
+        Memo1.Lines.Add(sLineBreak);
+      end)
+   .&Catch(                                                                         //Catch error
+     procedure(E: Exception)
+     begin
+       Memo1.Lines.Add('Erreur : ' + E.Message);
+     end); 
+```
+
+<br/>
+
 # Transforming a Synchronous Function into an Asynchronous One
 
 <br/>
