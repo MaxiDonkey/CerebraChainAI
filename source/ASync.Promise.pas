@@ -302,16 +302,15 @@ begin
         begin
           {--- If the operation is not yet complete, we add callbacks for chaining }
           FThenHandlers.Add(
-              procedure(Value: T)
-              begin
-                try
-                  Resolve(AOnFulfill(Value));
-                except
-                  on E: Exception do
-                    Reject(E);
-                end;
-              end);
-
+            procedure(Value: T)
+            begin
+              try
+                Resolve(AOnFulfill(Value));
+              except
+                on E: Exception do
+                  Reject(E);
+              end;
+            end);
           FCatchHandlers.Add(
             procedure(E: Exception)
             begin
@@ -325,61 +324,61 @@ function TPromise<T>.&Then(AOnFulfill: TFunc<T, TPromise<T>>): TPromise<T>;
 begin
   Result := TPromise<T>.Create(
     procedure(Resolve: TProc<T>; Reject: TProc<Exception>)
-      begin
-        if FState = psFulfilled then
-          begin
-            try
-              AOnFulfill(FValue)
-                .&Then(
-                  procedure(NewValue: T)
-                  begin
-                    Resolve(NewValue);
-                  end)
-                .&Catch(
+    begin
+      if FState = psFulfilled then
+        begin
+          try
+            AOnFulfill(FValue)
+              .&Then(
+                procedure(NewValue: T)
+                begin
+                  Resolve(NewValue);
+                end)
+              .&Catch(
+                procedure(E: Exception)
+                begin
+                  Reject(E);
+                end);
+          except
+            on E: Exception do
+              Reject(E);
+          end;
+        end
+      else
+      if FState = psRejected then
+        begin
+          Reject(FError)
+        end
+      else
+        begin
+          FThenHandlers.Add(
+            procedure(Value: T)
+            begin
+              try
+                AOnFulfill(Value)
+                  .&Then(
+                    procedure(NewValue: T)
+                    begin
+                      Resolve(NewValue);
+                    end)
+                  .&Catch(
                   procedure(E: Exception)
                   begin
                     Reject(E);
                   end);
-            except
-              on E: Exception do
-                Reject(E);
-            end;
-          end
-        else
-        if FState = psRejected then
-          begin
-            Reject(FError)
-          end
-        else
-          begin
-            FThenHandlers.Add(
-                procedure(Value: T)
-                begin
-                  try
-                    AOnFulfill(Value)
-                      .&Then(
-                          procedure(NewValue: T)
-                          begin
-                            Resolve(NewValue);
-                          end)
-                      .&Catch(
-                          procedure(E: Exception)
-                          begin
-                            Reject(E);
-                          end);
-                  except
-                    on E: Exception do
-                      Reject(E);
-                  end;
-                end
-              );
-            FCatchHandlers.Add(
-              procedure(E: Exception)
-              begin
-                Reject(E);
-              end);
-          end;
-      end);
+              except
+                on E: Exception do
+                  Reject(E);
+              end;
+            end
+            );
+          FCatchHandlers.Add(
+            procedure(E: Exception)
+            begin
+              Reject(E);
+            end);
+        end;
+    end);
 end;
 
 function TPromise<T>.&Then<TResult>(
@@ -387,41 +386,41 @@ function TPromise<T>.&Then<TResult>(
 begin
   Result := TPromise<TResult>.Create(
     procedure(Resolve: TProc<TResult>; Reject: TProc<Exception>)
+    begin
+      if FState = psFulfilled then
+        begin
+          try
+            {--- Call the action without parameters and resolve with the result }
+            Resolve(AOnFulfill());
+          except
+            on E: Exception do
+              Reject(E);
+          end;
+        end
+    else
+    if FState = psRejected then
       begin
-        if FState = psFulfilled then
+        Reject(FError);
+      end
+    else
+      begin
+        {--- If the promise is pending, we add callbacks }
+        FThenHandlers.Add(
+          procedure(Value: T)
           begin
             try
-              {--- Call the action without parameters and resolve with the result }
               Resolve(AOnFulfill());
             except
               on E: Exception do
                 Reject(E);
             end;
-          end
-      else
-      if FState = psRejected then
-        begin
-          Reject(FError);
-        end
-      else
-        begin
-          {--- If the promise is pending, we add callbacks }
-          FThenHandlers.Add(
-              procedure(Value: T)
-              begin
-                try
-                  Resolve(AOnFulfill());
-                except
-                  on E: Exception do
-                    Reject(E);
-                end;
-              end);
-          FCatchHandlers.Add(
-              procedure(E: Exception)
-              begin
-                Reject(E);
-              end);
-        end;
+          end);
+        FCatchHandlers.Add(
+          procedure(E: Exception)
+          begin
+            Reject(E);
+          end);
+      end;
     end);
 end;
 
@@ -436,15 +435,15 @@ begin
           try
             AOnFulfill(FValue)
               .&Then(
-                  procedure(NewValue: TResult)
-                  begin
-                    Resolve(NewValue);
-                  end)
+                procedure(NewValue: TResult)
+                begin
+                  Resolve(NewValue);
+                end)
               .&Catch(
-                  procedure(E: Exception)
-                  begin
-                    Reject(E);
-                  end);
+                procedure(E: Exception)
+                begin
+                  Reject(E);
+                end);
           except
             on E: Exception do
               Reject(E);
@@ -458,30 +457,30 @@ begin
       else
         begin
           FThenHandlers.Add(
-              procedure(Value: T)
-              begin
-                try
-                  AOnFulfill(Value)
-                    .&Then(
-                        procedure(NewValue: TResult)
-                        begin
-                          Resolve(NewValue);
-                        end)
-                    .&Catch(
-                        procedure(E: Exception)
-                        begin
-                          Reject(E);
-                        end);
-                except
-                  on E: Exception do
-                    Reject(E);
-                end;
-              end);
+            procedure(Value: T)
+            begin
+              try
+                AOnFulfill(Value)
+                  .&Then(
+                    procedure(NewValue: TResult)
+                    begin
+                      Resolve(NewValue);
+                    end)
+                  .&Catch(
+                    procedure(E: Exception)
+                    begin
+                      Reject(E);
+                    end);
+              except
+                on E: Exception do
+                  Reject(E);
+              end;
+            end);
           FCatchHandlers.Add(
-              procedure(E: Exception)
-              begin
-                Reject(E);
-              end);
+            procedure(E: Exception)
+            begin
+              Reject(E);
+            end);
         end;
     end);
 end;
@@ -512,21 +511,21 @@ begin
         begin
           {--- If the operation is not yet completed, add callbacks for chaining }
           FThenHandlers.Add(
-              procedure(Value: T)
-              begin
-                try
-                  AOnFulfill;
-                  Resolve(Value);
-                except
-                  on E: Exception do
-                    Reject(E);
-                end;
-              end);
+            procedure(Value: T)
+            begin
+              try
+                AOnFulfill;
+                Resolve(Value);
+              except
+                on E: Exception do
+                  Reject(E);
+              end;
+            end);
           FCatchHandlers.Add(
-              procedure(E: Exception)
-              begin
-                Reject(E);
-              end);
+            procedure(E: Exception)
+            begin
+              Reject(E);
+            end);
         end;
     end);
 end;
@@ -536,32 +535,32 @@ begin
   {--- Create a new promise that passes the value or handles the error with AOnReject }
   Result := TPromise<T>.Create(
     procedure(Resolve: TProc<T>; Reject: TProc<Exception>)
-      begin
-        if FState = psFulfilled then
-          begin
-            Resolve(FValue);
-          end
-        else
-        if FState = psRejected then
-          begin
-            AOnReject(FError);
-            Reject(FError);
-          end
-        else
-          begin
-            FThenHandlers.Add(
-                procedure(Value: T)
-                begin
-                  Resolve(Value);
-                end);
-            FCatchHandlers.Add(
-                procedure(E: Exception)
-                begin
-                  AOnReject(E);
-                  Reject(E);
-                end);
-          end;
-      end);
+    begin
+      if FState = psFulfilled then
+        begin
+          Resolve(FValue);
+        end
+      else
+      if FState = psRejected then
+        begin
+          AOnReject(FError);
+          Reject(FError);
+        end
+      else
+        begin
+          FThenHandlers.Add(
+            procedure(Value: T)
+            begin
+              Resolve(Value);
+            end);
+          FCatchHandlers.Add(
+            procedure(E: Exception)
+            begin
+              AOnReject(E);
+              Reject(E);
+            end);
+        end;
+    end);
 end;
 
 initialization
