@@ -90,7 +90,7 @@ begin
 end; 
 ```
 >[!NOTE]
-> We use the ***GenAI*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
+> We use the ***[GenAI](https://github.com/MaxiDonkey/DelphiGenAI)*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
 
 <br/>
 
