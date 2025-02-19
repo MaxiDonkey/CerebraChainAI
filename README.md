@@ -12,7 +12,7 @@ ___
     - [Why](#Why)
     - [How does it work](#How-does-it-work)
     - [Detailed explanations](#Detailed-explanations)
-- [Transforming a Synchronous Function into an Asynchronous One](#Transforming-a-Synchronous-Function-into-an-Asynchronous-One)
+- [Transforming a Synchronous method into an Asynchronous One](#Transforming-a-Synchronous-method-into-an-Asynchronous-One)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -156,7 +156,7 @@ Refer to [part I](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/ChainOf
 
 <br/>
 
-# Transforming a Synchronous Function into an Asynchronous One
+# Transforming a Synchronous method into an Asynchronous One
 
 Refer to [part II](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/Transforming.md)
 
