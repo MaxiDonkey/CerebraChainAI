@@ -1,4 +1,4 @@
-#Transforming a Synchronous Function into an Asynchronous One
+# Transforming a Synchronous Function into an Asynchronous One
 
 - [Synchronous method](#Synchronous-method)
 - [Asynchronous method](#Asynchronous-method)
