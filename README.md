@@ -44,6 +44,8 @@ We use the Promise design pattern, which enables efficient management of a serie
 - Centralized handling of intermediate results.
 - A non-blocking operation, ensuring smooth workflow execution.
 
+Refer to [detail explanations ](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/ChainOfThought.md)
+
 Here is a diagram illustrating the Promise pattern.
 ![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Schema01.png?raw=true "Preview")
 
@@ -149,6 +151,8 @@ end;
 ```
 >[!WARNING]
 > Execution is asynchronous. It is crucial to ensure that the chained instruction is constructed as a single, continuous statement to avoid introducing intermediate processing steps, which would inherently be synchronous.
+
+<br/>
 
 ## Detailed explanations
 
