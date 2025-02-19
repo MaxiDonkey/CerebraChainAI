@@ -26,7 +26,7 @@ Simply adding this unit is **enough** to benefit from optimized promise manageme
 
 <br/>
 
-Additionally, **we will explore how to extend a synchronous function into an asynchronous one** using the mechanics provided by the `Async.Params` and `Async.Support` units. This approach does **not** rely on promises but rather on a structured asynchronous framework that enables a smooth transition without requiring a complete code rewrite.  
+Additionally, **we will explore how to [extend a synchronous method](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/Transforming.md) into an asynchronous one** using the mechanics provided by the `Async.Params` and `Async.Support` units. This approach does **not** rely on promises but rather on a structured asynchronous framework that enables a smooth transition without requiring a complete code rewrite.  
 
 We will emphasize:  
 - **Necessary prerequisites** to enable this mechanism  
