@@ -336,7 +336,7 @@ begin
   if Result.Trim.IsEmpty then
     raise Exception.Create('Formulate a question to address a topic.');
 
-  Result := Format(GetFileContent(PATH + 'step1a.txt'), [Result]);
+  Result := Format(GetFileContent(PATH + 'step1.txt'), [Result]);
 end;
 
 function TForm1.PromptStep(const FileName: string; const PriorResult: string): string;
