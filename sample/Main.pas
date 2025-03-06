@@ -74,6 +74,8 @@ end;
 function CreateChatPromise(const Prompt: string): TPromise<string>;
 begin
   var Client := TGenAIFactory.CreateInstance(My_Key);
+  Client.API.HttpClient.SendTimeOut := 120000;
+  Client.API.HttpClient.ConnectionTimeout := 120000;
 
   Result := TPromise<string>.Create(
     procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
@@ -105,6 +107,8 @@ end;
 function CreateDocCreatorPromise(const Prompt: string; const Developer: string = ''): TPromise<string>;
 begin
   var Client := TGenAIFactory.CreateInstance(My_Key);
+  Client.API.HttpClient.SendTimeOut := 120000;
+  Client.API.HttpClient.ConnectionTimeout := 120000;
 
   Result := TPromise<string>.Create(
     procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
@@ -309,6 +313,8 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   Client := TGenAIFactory.CreateInstance(My_Key);
+  Client.API.HttpClient.SendTimeOut := 120000;
+  Client.API.HttpClient.ConnectionTimeout := 120000;
 end;
 
 function TForm1.GetFileContent(const FileName: string): string;
@@ -330,7 +336,7 @@ begin
   if Result.Trim.IsEmpty then
     raise Exception.Create('Formulate a question to address a topic.');
 
-  Result := Format(GetFileContent(PATH + 'step1.txt'), [Result]);
+  Result := Format(GetFileContent(PATH + 'step1a.txt'), [Result]);
 end;
 
 function TForm1.PromptStep(const FileName: string; const PriorResult: string): string;
@@ -338,4 +344,6 @@ begin
   Result := Format(GetFileContent(PATH + FileName), [PriorResult]);
 end;
 
+initialization
+  ReportMemoryLeaksOnShutdown := True;
 end.
