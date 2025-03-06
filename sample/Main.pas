@@ -73,17 +73,13 @@ end;
 
 function CreateChatPromise(const Prompt: string): TPromise<string>;
 begin
-  var Client := TGenAIFactory.CreateInstance(My_Key);
-  Client.API.HttpClient.SendTimeOut := 120000;
-  Client.API.HttpClient.ConnectionTimeout := 120000;
-
   Result := TPromise<string>.Create(
     procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
     begin
-      Client.Chat.AsynCreate(
+      Form1.Client.Chat.AsynCreate(
         procedure(Params: TChatParams)
         begin
-          Params.Model('gpt-4o');
+          Params.Model('gpt-4o-mini');
           Params.Messages([
             FromUser(Prompt)
           ]);
@@ -106,11 +102,7 @@ end;
 
 function CreateDocCreatorPromise(const Prompt: string; const Developer: string = ''): TPromise<string>;
 begin
-  var Client := TGenAIFactory.CreateInstance(My_Key);
-  Client.API.HttpClient.SendTimeOut := 120000;
-  Client.API.HttpClient.ConnectionTimeout := 120000;
-
-  Result := TPromise<string>.Create(
+   Result := TPromise<string>.Create(
     procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
     begin
       var Messages := TJSONArray.Create;
@@ -122,10 +114,10 @@ begin
         raise Exception.Create('Prompt can''t be null');
       Messages.Add(FromUser(Prompt).Detach);
 
-      Client.Chat.AsynCreate(
+      Form1.Client.Chat.AsynCreate(
         procedure(Params: TChatParams)
         begin
-          Params.Model('gpt-4o');
+          Params.Model('gpt-4o-mini');
           Params.Messages(Messages);
         end,
         function: TAsynChat
@@ -313,8 +305,8 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   Client := TGenAIFactory.CreateInstance(My_Key);
-  Client.API.HttpClient.SendTimeOut := 120000;
-  Client.API.HttpClient.ConnectionTimeout := 120000;
+  Client.API.HttpClient.SendTimeOut := 180000;
+  Client.API.HttpClient.ConnectionTimeout := 180000;
 end;
 
 function TForm1.GetFileContent(const FileName: string): string;
