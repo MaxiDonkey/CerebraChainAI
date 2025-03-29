@@ -6,17 +6,18 @@ ___
 ![GitHub](https://img.shields.io/badge/platform-all%20platforms-green)
 ![GitHub](https://img.shields.io/badge/Updated%20on%20february%2019,%202025-blue)
 
-<br/>
+<br>
 
 - [Promise pattern](#Promise-pattern)
     - [Why](#Why)
     - [How does it work](#How-does-it-work)
     - [Detailed explanations](#Detailed-explanations)
 - [Transforming a Synchronous method into an Asynchronous One](#Transforming-a-Synchronous-method-into-an-Asynchronous-One)
+- [To go further](#to-go-further)
 - [Contributing](#contributing)
 - [License](#license)
 
-<br/>
+<br>
 
 # Promise pattern
 
@@ -35,7 +36,7 @@ When applied to asynchronous processing provided by the following wrappers, this
 
 Furthermore, it offers the flexibility to control or dynamically adapt a new thought framework, which is not possible with a model that has a predefined reasoning structure.
 
-<br/>
+<br>
 
 ## How does it work?
 
@@ -49,7 +50,7 @@ Refer to [detail explanations ](https://github.com/MaxiDonkey/CerebraChainAI/blo
 Here is a diagram illustrating the Promise pattern.
 ![Preview](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/images/Schema01.png?raw=true "Preview")
 
-<br/>
+<br>
 
 ## Use case example
 
@@ -92,7 +93,7 @@ end;
 >[!NOTE]
 > We use the ***[GenAI](https://github.com/MaxiDonkey/DelphiGenAI)*** for ***OpenAI*** wrapper; therefore, we declare the `GenAI` and `GenAI.Types` units in the uses section.
 
-<br/>
+<br>
 
 ### The chain of thought
 
@@ -152,19 +153,25 @@ end;
 >[!WARNING]
 > Execution is asynchronous. It is crucial to ensure that the chained instruction is constructed as a single, continuous statement to avoid introducing intermediate processing steps, which would inherently be synchronous.
 
-<br/>
+<br>
 
 ## Detailed explanations
 
 Refer to [part I](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/ChainOfThought.md)
 
-<br/>
+<br>
 
 # Transforming a Synchronous method into an Asynchronous One
 
 Refer to [part II](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/Transforming.md)
 
-<br/>
+<br>
+
+# To go further
+
+To go further: Check out the [SynkFlowAI](https://github.com/MaxiDonkey/SynkFlowAI) project – a proof-of-concept async pipeline framework in Delphi designed to demonstrate modern AI orchestration with Promises, streaming, and chained execution.
+
+<br>
 
 # Contributing
 
