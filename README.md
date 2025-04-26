@@ -8,14 +8,23 @@ ___
 
 <br>
 
-- [Promise pattern](#Promise-pattern)
-    - [Why](#Why)
-    - [How does it work](#How-does-it-work)
-    - [Detailed explanations](#Detailed-explanations)
-- [Transforming a Synchronous method into an Asynchronous One](#Transforming-a-Synchronous-method-into-an-Asynchronous-One)
+- [Documentation Overview](#documentation-overview)
+- [Promise pattern](#promise-pattern)
+    - [Why](#why)
+    - [How does it work](#how-does-it-work)
+    - [Detailed explanations](#detailed-explanations)
+- [Transforming a Synchronous method into an Asynchronous One](#transforming-a-synchronous-method-into-an-asynchronous-one)
 - [To go further](#to-go-further)
 - [Contributing](#contributing)
 - [License](#license)
+
+<br>
+
+# Documentation Overview
+
+Comprehensive Project Documentation Reference
+- [Transforming a Synchronous Function into an Asynchronous One](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/Transforming.md)
+- [Managing Promises and Thought Chains with Generative AI Models](https://github.com/MaxiDonkey/CerebraChainAI/blob/main/ChainOfThought.md)
 
 <br>
 
