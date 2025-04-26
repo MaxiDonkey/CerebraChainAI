@@ -209,47 +209,6 @@ begin
     end);
 end;
 
-function CreateDocCreatorPromise(const Prompt: string; const Developer: string = ''): TPromise<string>;
-begin
-//  var Client := TGenAIFactory.CreateInstance(My_Key);
-//  Client.API.HttpClient.SendTimeOut := 120000;
-//  Client.API.HttpClient.ConnectionTimeout := 120000;
-
-  //not streamed
-  Result := TPromise<string>.Create(
-    procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
-    begin
-      var Messages := TJSONArray.Create;
-
-      if not Developer.Trim.IsEmpty then
-        Messages.Add(FromDeveloper(Developer).Detach);
-
-      if Prompt.Trim.IsEmpty then
-        raise Exception.Create('Prompt can''t be null');
-      Messages.Add(FromUser(Prompt).Detach);
-
-      Form1.Client.Chat.AsynCreate(
-        procedure(Params: TChatParams)
-        begin
-          Params.Model('gpt-4o-mini');
-          Params.Messages(Messages);
-        end,
-        function: TAsynChat
-        begin
-          Result.OnSuccess :=
-            procedure(Sender: TObject; Chat: TChat)
-            begin
-              Resolve(Chat.Choices[0].Message.Content);
-            end;
-          Result.OnError :=
-            procedure(Sender: TObject; ErrorMessage: string)
-            begin
-              Reject(Exception.Create(ErrorMessage));
-            end;
-        end);
-    end);
-end;
-
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   var Prompt1 := 'From the array ["apple", "banana", "orange", "tomato", "nut", "tangerine", "pear", "cherry"], pick a random item. Always respond with ONE word. You can''t choice %s';
