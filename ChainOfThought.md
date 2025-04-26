@@ -314,41 +314,57 @@ The code used for the promise is as follows:
 
 ```Delphi
 //uses GenAI, GenAI.Types, ASync.Promise;
-function CreateDocCreatorPromise(const Prompt: string; const Developer: string = ''): TPromise<string>;
+function CreateChatStreamPromise(const Prompt: string): TPromise<string>;
+var
+  buffer: string;
 begin
-  var Client := TGenAIFactory.CreateInstance(My_Key);
-
+  //streamed
   Result := TPromise<string>.Create(
     procedure(Resolve: TProc<string>; Reject: TProc<Exception>)
     begin
-      var Messages := TJSONArray.Create;
-
-      if not Developer.Trim.IsEmpty then
-        Messages.Add(FromDeveloper(Developer).Detach);
-
-      if Prompt.Trim.IsEmpty then
-        raise Exception.Create('Prompt can''t be null');
-      Messages.Add(FromUser(Prompt).Detach);
-
-      Client.Chat.AsynCreate(
-        procedure(Params: TChatParams)
+      Form1.Client.Chat.AsynCreateStream(
+        procedure (Params: TChatParams)
         begin
-          Params.Model('gpt-4o');
-          Params.Messages(Messages);
+          Params.Model('gpt-4o-mini');
+          Params.Messages([
+            FromUser(Prompt)
+          ]);
+          Params.Stream;
         end,
-        function: TAsynChat
+        function : TAsynChatStream
         begin
+          Result.Sender := Form1.Memo1;
+
+          Result.OnStart := nil;
+
+          Result.OnProgress :=
+            procedure (Sender: TObject; Chat: TChat)
+            begin
+              DisplayStream(Sender, Chat);
+              Buffer := Buffer + Chat.Choices[0].Delta.Content;
+            end;
+
           Result.OnSuccess :=
-            procedure(Sender: TObject; Chat: TChat)
+            procedure (Sender: TObject)
             begin
-              Resolve(Chat.Choices[0].Message.Content);
+              Resolve(Buffer + sLineBreak);
             end;
+
           Result.OnError :=
-            procedure(Sender: TObject; ErrorMessage: string)
+            procedure (Sender: TObject; Error: string)
             begin
-              Reject(Exception.Create(ErrorMessage));
+              Reject(Exception.Create(Error));
             end;
-        end);
+
+          Result.OnDoCancel := DoCancellation;
+
+          Result.OnCancellation :=
+            procedure (Sender: TObject)
+            begin
+              Reject(Exception.Create('Aborted'));
+            end;
+
+        end)
     end);
 end;
 ```
