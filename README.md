@@ -4,7 +4,7 @@ Advanced asynchronous management in Delphi using promises, enabling non-blocking
 ___
 ![GitHub](https://img.shields.io/badge/IDE%20Version-Delphi%2010.3/11/12-yellow)
 ![GitHub](https://img.shields.io/badge/platform-all%20platforms-green)
-![GitHub](https://img.shields.io/badge/Updated%20on%20april%20224,%202025-blue)
+![GitHub](https://img.shields.io/badge/Updated%20on%20april%2024,%202025-blue)
 
 <br>
 
