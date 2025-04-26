@@ -5,11 +5,13 @@ object Form1: TForm1
   ClientHeight = 672
   ClientWidth = 1096
   Color = clBtnFace
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   DesignSize = (
     1096
@@ -61,5 +63,16 @@ object Form1: TForm1
     Caption = 'Clear'
     TabOrder = 4
     OnClick = Button3Click
+  end
+  object Button4: TButton
+    Left = 927
+    Top = 144
+    Width = 161
+    Height = 25
+    Anchors = [akTop, akRight]
+    Caption = 'Cancel'
+    TabOrder = 5
+    Visible = False
+    OnClick = Button4Click
   end
 end
